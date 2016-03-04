@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AdminConsole.Models;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Data.Entity;
+using Microsoft.Extensions.Caching.Memory;
+using AdminConsole.Extensions;
 
 namespace AdminConsole
 {
@@ -35,6 +39,22 @@ namespace AdminConsole
             // Add framework services.
             services.AddApplicationInsightsTelemetry(Configuration);
 
+            // Add EF services to the services container.
+            services.AddEntityFramework()
+                .AddSqlServer()
+                .AddDbContext<MarketDbContext>(options =>
+                    options.UseSqlServer(Configuration["Data:default:ConnectionString"]));
+
+            //Add ConsoleLog
+            services.AddLogging();
+
+            //Add InMemoryCache
+            services.AddSingleton<IMemoryCache, MemoryCache>();
+            services.AddCaching();
+
+            //Add InMemorySession
+            services.AddSession();
+
             services.AddMvc();
         }
 
@@ -62,12 +82,18 @@ namespace AdminConsole
 
             app.UseStaticFiles();
 
+            app.UseSession();
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            app.ApplicationServices.CreateDbAsync<MarketDbContext>(
+               SampleData.CreateDemoDataAsync
+               ).Wait();
         }
 
         // Entry point for the application.
