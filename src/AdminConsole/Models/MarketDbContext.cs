@@ -8,7 +8,7 @@ namespace AdminConsole.Models
 {
     public class MarketDbContext : DbContext
     {
-        public DbSet<Product > Products { get; set; }
+        public DbSet<Product> Products { get; set; }
 
         public DbSet<Promotion> Promotions { get; set; }
     }

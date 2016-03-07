@@ -10,28 +10,30 @@ namespace AdminConsole.Extensions
 {
     public static class EntityFrameworkHelper
     {
-        public static async Task CreateDbAsync<T>(this IServiceProvider serviceProvider, params Func<IServiceProvider, Task>[] moreInitials)
+        public static void CreateDb<T>(this IServiceProvider serviceProvider, params Action<T>[] moreInitials)
             where T : DbContext
         {
-            using (var db = serviceProvider.GetRequiredService<T>())
+            using (var serviceScope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
-
-                if (db.Database != null)
+                using (var db = serviceScope.ServiceProvider.GetRequiredService<T>())
                 {
-                    try
+                    if (db.Database != null)
                     {
-                        if (await db.Database.EnsureCreatedAsync())
+                        try
                         {
-                            foreach (var init in moreInitials)
+                            if (db.Database.EnsureCreated())
                             {
-                                await init(serviceProvider);
+                                foreach (var init in moreInitials)
+                                {
+                                    init(db);
+                                }
                             }
                         }
-                    }
-                    catch (Exception ex)
-                    {
-                        Trace.TraceError(ex.Message);
-                        throw;
+                        catch (Exception ex)
+                        {
+                            Trace.TraceError(ex.Message);
+                            throw;
+                        }
                     }
                 }
             }

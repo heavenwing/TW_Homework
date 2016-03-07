@@ -15,7 +15,7 @@ namespace AdminConsole.Models
 
         public string  ProcessType { get; set; }
 
-        public List<ProductPromotion> Products { get; set; }
+        public List<ProductPromotion> Products { get; set; } = new List<ProductPromotion>();
 
     }
 }

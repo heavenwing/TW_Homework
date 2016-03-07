@@ -102,9 +102,8 @@ namespace AdminConsole
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            app.ApplicationServices.CreateDbAsync<MarketDbContext>(
-               SampleData.CreateDemoDataAsync
-               ).Wait();
+            app.ApplicationServices.CreateDb<MarketDbContext>(
+                SampleData.CreateDemoData);
         }
 
         // Entry point for the application.

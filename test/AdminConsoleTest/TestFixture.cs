@@ -1,4 +1,5 @@
 ﻿using System;
+using AdminConsole;
 using AdminConsole.Dtos;
 using AdminConsole.Models;
 using AdminConsole.ViewModels;
@@ -6,6 +7,7 @@ using AutoMapper;
 using Microsoft.Data.Entity;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
+using AdminConsole.Extensions;
 
 namespace AdminConsoleTest
 {
@@ -32,6 +34,9 @@ namespace AdminConsoleTest
                 sp.GetRequiredService<MapperConfiguration>().CreateMapper());
 
             ServiceProvider = services.BuildServiceProvider();
+
+            ServiceProvider.CreateDb<MarketDbContext>(
+                SampleData.CreateDemoData);
         }
 
         public IServiceProvider ServiceProvider { get; set; }

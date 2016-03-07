@@ -15,6 +15,6 @@ namespace AdminConsole.Models
 
         public decimal Price { get; set; }
 
-        public List<ProductPromotion> Promotions { get; set; }
+        public List<ProductPromotion> Promotions { get; set; } = new List<ProductPromotion>();
     }
 }
