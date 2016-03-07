@@ -7,7 +7,18 @@ namespace AdminConsole.ViewModels
     {
         public static void Config(IMapperConfiguration cfg)
         {
-            cfg.CreateMap<Product, ProductVm>();
+            cfg.CreateMap<Product, ProductVm>().
+                AfterMap((s, d) =>
+                {
+                    if (s.Promotions != null)
+                    {
+                        foreach (var pp in s.Promotions)
+                        {
+                            if (pp.Promotion != null)
+                                d.PromotionNames.Add(pp.Promotion.Name);
+                        }
+                    }
+                });
 
             cfg.CreateMap<ProductVm, Product>();
         }
