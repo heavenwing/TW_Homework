@@ -6,12 +6,12 @@ using Microsoft.Data.Entity;
 
 namespace AdminConsoleTest
 {
-    [Collection("DbCollection")]
+    [Collection("Fixture")]
     public class MarketDbContextTest
     {
-        private DatabaseFixture _fixture;
+        private TestFixture _fixture;
 
-        public MarketDbContextTest(DatabaseFixture fixture)
+        public MarketDbContextTest(TestFixture fixture)
         {
             _fixture = fixture;
         }

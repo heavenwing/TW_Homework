@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AdminConsole.Dtos;
 using AdminConsole.Models;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
@@ -11,6 +12,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Data.Entity;
 using Microsoft.Extensions.Caching.Memory;
 using AdminConsole.Extensions;
+using AdminConsole.ViewModels;
+using AutoMapper;
 
 namespace AdminConsole
 {
@@ -56,6 +59,14 @@ namespace AdminConsole
             services.AddSession();
 
             services.AddMvc();
+
+            //var mapperConfig = new MapperConfiguration(cfg =>
+            //{
+            //    VmMapper.Config(cfg);
+            //    DtoMapper.Config(cfg);
+            //});
+            //var mapper = mapperConfig.CreateMapper();
+            //services
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
