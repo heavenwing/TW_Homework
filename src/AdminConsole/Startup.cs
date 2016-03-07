@@ -60,13 +60,16 @@ namespace AdminConsole
 
             services.AddMvc();
 
-            //var mapperConfig = new MapperConfiguration(cfg =>
-            //{
-            //    VmMapper.Config(cfg);
-            //    DtoMapper.Config(cfg);
-            //});
-            //var mapper = mapperConfig.CreateMapper();
-            //services
+            services.AddSingleton(sp =>
+            {
+                return new MapperConfiguration(cfg =>
+                {
+                    VmMapper.Config(cfg);
+                    DtoMapper.Config(cfg);
+                });
+            });
+            services.AddSingleton(sp =>
+                sp.GetRequiredService<MapperConfiguration>().CreateMapper());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

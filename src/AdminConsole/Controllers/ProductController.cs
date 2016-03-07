@@ -34,5 +34,15 @@ namespace AdminConsole.Controllers
 
             return View(model);
         }
+
+        public IActionResult Edit()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IActionResult Delete()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
