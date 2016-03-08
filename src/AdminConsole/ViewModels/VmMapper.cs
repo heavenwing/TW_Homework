@@ -19,8 +19,10 @@ namespace AdminConsole.ViewModels
                         }
                     }
                 });
+            cfg.CreateMap<Promotion, PromotionVm>();
 
             cfg.CreateMap<ProductVm, Product>();
+            cfg.CreateMap<PromotionVm, Promotion>();
         }
     }
 }

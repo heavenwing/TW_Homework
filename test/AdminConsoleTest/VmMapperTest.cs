@@ -63,5 +63,21 @@ namespace AdminConsoleTest
             Assert.Equal(1, dest.PromotionNames?.Count);
             Assert.Equal("95%off", dest.PromotionNames[0]);
         }
+
+        [Fact]
+        public void PromotionToViewModelNameShouldMap()
+        {
+            var source = new Promotion
+            {
+                Id = Guid.NewGuid(),
+                Name = "95%off",
+            };
+
+            var mapper = _fixture.ServiceProvider.GetRequiredService<IMapper>();
+            var dest = mapper.Map<PromotionVm>(source);
+
+            Assert.NotNull(dest);
+            Assert.Equal("95%off", dest.Name);
+        }
     }
 }
