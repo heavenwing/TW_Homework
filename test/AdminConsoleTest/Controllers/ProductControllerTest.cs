@@ -1,37 +1,33 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using AdminConsole;
 using AdminConsole.Controllers;
 using AdminConsole.Models;
 using AdminConsole.ViewModels;
 using AutoMapper;
 using Microsoft.AspNet.Mvc;
+using Microsoft.Extensions.DependencyInjection;
 using Xunit;
-using AdminConsole.Extensions;
 
-namespace AdminConsoleTest
+namespace AdminConsoleTest.Controllers
 {
     [Collection("Fixture")]
-    public class PromotionControllerTest
+    public class ProductControllerTest
     {
         private TestFixture _fixture;
 
-        public PromotionControllerTest(TestFixture fixture)
+        public ProductControllerTest(TestFixture fixture)
         {
             _fixture = fixture;
         }
 
         [Fact]
-        public async Task IndexShouldGetPromotionInfo()
+        public async Task IndexShouldGetCompleteProductInfo()
         {
             using (var db = _fixture.ServiceProvider.GetRequiredService<MarketDbContext>())
             {
                 var mapper = _fixture.ServiceProvider.GetRequiredService<IMapper>();
 
-                var ctrl = new PromotionController(db, mapper);
+                var ctrl = new ProductController(db, mapper);
                 var result = await ctrl.Index();
 
                 Assert.NotNull(result);
@@ -40,8 +36,9 @@ namespace AdminConsoleTest
 
                 Assert.NotNull(viewResult.ViewData.Model);
 
-                var promotions = Assert.IsType<List<PromotionVm>>(viewResult.ViewData.Model);
-                Assert.Equal(2, promotions.Count);
+                var products = Assert.IsType<List<ProductVm>>(viewResult.ViewData.Model);
+                Assert.Equal(3, products.Count);
+                Assert.Equal(2, products[0].PromotionNames.Count);
             }
         }
     }
