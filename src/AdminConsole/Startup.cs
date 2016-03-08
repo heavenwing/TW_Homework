@@ -106,7 +106,7 @@ namespace AdminConsole
             });
 
             app.ApplicationServices.CreateDb<MarketDbContext>(
-                SampleData.CreateDemoData);
+                SampleData.Create);
         }
 
         // Entry point for the application.

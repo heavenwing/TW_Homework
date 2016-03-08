@@ -9,7 +9,7 @@ namespace AdminConsole
 {
     public class SampleData
     {
-        public static void CreateDemoData(MarketDbContext db)
+        public static void Create(MarketDbContext db)
         {
             db.Promotions.Add(new Promotion
             {

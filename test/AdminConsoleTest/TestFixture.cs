@@ -36,7 +36,7 @@ namespace AdminConsoleTest
             ServiceProvider = services.BuildServiceProvider();
 
             ServiceProvider.CreateDb<MarketDbContext>(
-                SampleData.CreateDemoData);
+                SampleData.Create);
         }
 
         public IServiceProvider ServiceProvider { get; set; }

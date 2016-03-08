@@ -5,11 +5,6 @@ using System.Threading.Tasks;
 
 namespace AdminConsole.Logic
 {
-    public interface IPreProcessor
-    {
-        Dictionary<string, decimal> Process(string[] rawItems);
-    }
-
     public class DefaultPreProcessor : IPreProcessor
     {
         public Dictionary<string, decimal> Process(string[] rawItems)
