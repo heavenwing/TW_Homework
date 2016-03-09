@@ -9,18 +9,20 @@ namespace AdminConsole
 {
     public class SampleData
     {
+        public const string PromotionId_BuyTwo = "a02cacfb-3c66-4c6c-a32c-3cfd6b4f80dd";
+        public const string PromotionId_95Off = "6f6717c4-bf7c-4521-a791-ebb6992b9f63";
         public static void Create(MarketDbContext db)
         {
             db.Promotions.Add(new Promotion
             {
-                Id = new Guid("a02cacfb-3c66-4c6c-a32c-3cfd6b4f80dd"),
+                Id = new Guid(PromotionId_BuyTwo),
                 Name = "买二赠一",
                 ProcessType = "TODO",
                 IsOverride = true
             });
             db.Promotions.Add(new Promotion
             {
-                Id = new Guid("6f6717c4-bf7c-4521-a791-ebb6992b9f63"),
+                Id = new Guid(PromotionId_95Off),
                 Name = "95折",
                 ProcessType = "TODO",
                 IsOverride = false
@@ -39,13 +41,13 @@ namespace AdminConsole
                     {
                         Id=Guid.NewGuid(),
                         ProductId="ITEM000001",
-                        PromotionId=new Guid("a02cacfb-3c66-4c6c-a32c-3cfd6b4f80dd")
+                        PromotionId=new Guid(PromotionId_BuyTwo)
                     },
                     new ProductPromotion
                     {
                         Id=Guid.NewGuid(),
                         ProductId="ITEM000001",
-                        PromotionId=new Guid("6f6717c4-bf7c-4521-a791-ebb6992b9f63")
+                        PromotionId=new Guid(PromotionId_95Off)
                     }
                 }
             });
@@ -61,7 +63,7 @@ namespace AdminConsole
                     {
                         Id=Guid.NewGuid(),
                         ProductId="ITEM000003",
-                        PromotionId=new Guid("6f6717c4-bf7c-4521-a791-ebb6992b9f63")
+                        PromotionId=new Guid(PromotionId_95Off)
                     }
                 }
             });
@@ -77,7 +79,7 @@ namespace AdminConsole
                     {
                         Id=Guid.NewGuid(),
                         ProductId="ITEM000005",
-                        PromotionId=new Guid("a02cacfb-3c66-4c6c-a32c-3cfd6b4f80dd")
+                        PromotionId=new Guid(PromotionId_BuyTwo)
                     }
                 }
             });

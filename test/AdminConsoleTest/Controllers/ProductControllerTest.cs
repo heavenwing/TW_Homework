@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using AdminConsole;
 using AdminConsole.Controllers;
 using AdminConsole.Models;
 using AdminConsole.ViewModels;
@@ -23,7 +24,7 @@ namespace AdminConsoleTest.Controllers
         [Fact]
         public async Task IndexShouldGetCompleteProductInfo()
         {
-            using (var db = _fixture.ServiceProvider.GetRequiredService<MarketDbContext>())
+            await _fixture.DoDbActionInScopedAsync(async (db) =>
             {
                 var mapper = _fixture.ServiceProvider.GetRequiredService<IMapper>();
 
@@ -38,8 +39,8 @@ namespace AdminConsoleTest.Controllers
 
                 var products = Assert.IsType<List<ProductVm>>(viewResult.ViewData.Model);
                 Assert.Equal(3, products.Count);
-                Assert.Equal(2, products[0].PromotionNames.Count);
-            }
+                Assert.Equal(2, products.Find(o => o.Id == "ITEM000001").PromotionNames.Count);
+            });
         }
     }
 }

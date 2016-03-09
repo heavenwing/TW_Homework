@@ -22,7 +22,7 @@ namespace AdminConsoleTest
         [Fact]
         public async Task DataModelShouldValidAndSampleDataShouldCreated()
         {
-            using (var db = _fixture.ServiceProvider.GetService<MarketDbContext>())
+            await _fixture.DoDbActionInScopedAsync(async (db) =>
             {
                 var products = await db.Products.ToListAsync();
 
@@ -31,7 +31,7 @@ namespace AdminConsoleTest
                 var promotions = await db.Promotions.ToListAsync();
 
                 Assert.Equal(2, promotions.Count);
-            }
+            });
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using AdminConsole;
 using AdminConsole.Controllers;
 using AdminConsole.Models;
 using AdminConsole.ViewModels;
@@ -23,7 +24,7 @@ namespace AdminConsoleTest.Controllers
         [Fact]
         public async Task IndexShouldGetPromotionInfo()
         {
-            using (var db = _fixture.ServiceProvider.GetRequiredService<MarketDbContext>())
+            await _fixture.DoDbActionInScopedAsync(async (db) =>
             {
                 var mapper = _fixture.ServiceProvider.GetRequiredService<IMapper>();
 
@@ -38,7 +39,7 @@ namespace AdminConsoleTest.Controllers
 
                 var promotions = Assert.IsType<List<PromotionVm>>(viewResult.ViewData.Model);
                 Assert.Equal(2, promotions.Count);
-            }
+            });
         }
     }
 }

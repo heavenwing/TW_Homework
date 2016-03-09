@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using AdminConsole;
 using AdminConsole.Dtos;
 using AdminConsole.Models;
@@ -30,17 +31,37 @@ namespace AdminConsoleTest
                     DtoMapper.Config(cfg);
                 });
             });
-            services.AddSingleton(sp => 
+            services.AddSingleton(sp =>
                 sp.GetRequiredService<MapperConfiguration>().CreateMapper());
 
             ServiceProvider = services.BuildServiceProvider();
 
-            ServiceProvider.CreateDb<MarketDbContext>(
-                SampleData.Create);
+            ServiceProvider.CreateDb<MarketDbContext>(SampleData.Create);
         }
 
         public IServiceProvider ServiceProvider { get; set; }
 
+        public void DoDbActionInScoped(Action<MarketDbContext> action)
+        {
+            using (var serviceScope = ServiceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            {
+                using (var db = serviceScope.ServiceProvider.GetRequiredService<MarketDbContext>())
+                {
+                    action(db);
+                }
+            }
+        }
+
+        public async Task DoDbActionInScopedAsync(Func<MarketDbContext, Task> action)
+        {
+            using (var serviceScope = ServiceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            {
+                using (var db = serviceScope.ServiceProvider.GetRequiredService<MarketDbContext>())
+                {
+                    await action(db);
+                }
+            }
+        }
     }
 
     [CollectionDefinition("Fixture")]
