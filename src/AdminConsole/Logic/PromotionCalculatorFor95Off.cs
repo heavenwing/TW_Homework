@@ -5,9 +5,10 @@ namespace AdminConsole.Logic
 {
     public class PromotionCalculatorFor95Off : IPromotionCalculator
     {
-        public void Compute(Product product, ProductDto dto, ComputeResultDto result)
+        public void Compute(Product product, ProductDto dto)
         {
-            throw new System.NotImplementedException();
+            dto.SavingMoney = dto.SubTotal * 0.05m;
+            dto.SubTotal = dto.SubTotal - dto.SavingMoney;
         }
     }
 }

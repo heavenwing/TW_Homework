@@ -28,39 +28,51 @@ namespace AdminConsole.Logic
                     .SingleOrDefaultAsync(o => o.Id == kvp.Key);
                 if (product != null)
                 {
-                    var dto = CreateDto(kvp, product);
+                    var dto = new ProductDto
+                    {
+                        Name = product.Name,
+                        Count = kvp.Value,
+                        Price = product.Price,
+                        Unit = product.Unit,
+                        SubTotal = product.Price * kvp.Value
+                    };
 
-                    ComputePromotion(product, dto, result);
+                    ComputePromotion(product, dto);
 
                     result.Products.Add(dto);
+
+                    result.Total += dto.SubTotal;
+                    result.Saving += dto.SavingMoney;
                 }
             }
 
             return result;
         }
 
-        private static ProductDto CreateDto(KeyValuePair<string, decimal> kvp, Product product)
-        {
-            return new ProductDto
-            {
-                Name = product.Name,
-                Count = kvp.Value,
-                Price = product.Price,
-                Unit = product.Unit,
-                SubTotal = product.Price * kvp.Value
-            };
-        }
-
-        private void ComputePromotion(Product product, ProductDto dto, ComputeResultDto result)
+        private void ComputePromotion(Product product, ProductDto dto)
         {
             if (product.Promotions.Count == 0) return;
 
             var overridedPromotion = product.Promotions.Find(o => o.Promotion.IsOverride);
             if (overridedPromotion != null && overridedPromotion.Promotion != null)
             {
-                var calculator = (IPromotionCalculator)Activator.CreateInstance(Type.GetType(overridedPromotion.Promotion.CalculatorType));
-                calculator.Compute(product, dto, result);
+                RealPromotionCalculate(product, dto, overridedPromotion);
             }
+            else
+            {
+                foreach (var pro in product.Promotions)
+                {
+                    RealPromotionCalculate(product, dto, pro);
+                }
+            }
+        }
+
+        private static void RealPromotionCalculate(Product product, ProductDto dto,
+            ProductPromotion pro)
+        {
+            var calculator = (IPromotionCalculator)Activator.CreateInstance(
+                Type.GetType(pro.Promotion.CalculatorType));
+            calculator.Compute(product, dto);
         }
     }
 }

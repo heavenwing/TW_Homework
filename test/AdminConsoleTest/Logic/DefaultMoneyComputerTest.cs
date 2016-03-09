@@ -28,7 +28,7 @@ namespace AdminConsoleTest.Logic
             {
                 var input = new Dictionary<string, decimal>
                 {
-                    ["ITEM000001"] = 5, //羽毛球
+                    ["ITEM000001"] = 6, //羽毛球
                     ["ITEM000003"] = 2, //苹果
                     ["ITEM000005"] = 3 //可口可乐
                 };
@@ -38,12 +38,18 @@ namespace AdminConsoleTest.Logic
 
                 Assert.NotNull(output);
                 Assert.Equal(3, output.Products.Count);
+
                 Assert.Equal(4m, output.Products[0].SubTotal);
-                Assert.Equal(1m, output.Products[0].SavingCount);
+                Assert.Equal(2m, output.Products[0].SavingCount);
+
                 Assert.Equal(10.45m, output.Products[1].SubTotal);
                 Assert.Equal(0.55m, output.Products[1].SavingMoney);
+
                 Assert.Equal(6m, output.Products[2].SubTotal);
                 Assert.Equal(1m, output.Products[2].SavingCount);
+
+                Assert.Equal(20.45m, output.Total);
+                Assert.Equal(5.55m, output.Saving);
             });
         }
     }

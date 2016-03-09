@@ -8,6 +8,6 @@ namespace AdminConsole.Logic
 {
     public interface IPromotionCalculator
     {
-        void Compute(Product product, ProductDto dto, ComputeResultDto result);
+        void Compute(Product product, ProductDto dto);
     }
 }
