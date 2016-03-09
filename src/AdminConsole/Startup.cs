@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Data.Entity;
 using Microsoft.Extensions.Caching.Memory;
 using AdminConsole.Extensions;
+using AdminConsole.Logic;
 using AdminConsole.ViewModels;
 using AutoMapper;
 
@@ -70,6 +71,9 @@ namespace AdminConsole
             });
             services.AddSingleton(sp =>
                 sp.GetRequiredService<MapperConfiguration>().CreateMapper());
+
+            services.AddTransient<IPreProcessor, DefaultPreProcessor>();
+            services.AddTransient<IMoneyComputer, DefaultMoneyComputer>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -107,6 +111,7 @@ namespace AdminConsole
 
             app.ApplicationServices.CreateDb<MarketDbContext>(
                 SampleData.Create);
+
         }
 
         // Entry point for the application.
