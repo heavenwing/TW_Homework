@@ -13,7 +13,7 @@ namespace AdminConsole.Models
 
         public bool IsOverride { get; set; }
 
-        public string  ProcessType { get; set; }
+        public string  CalculatorType { get; set; }
 
         public List<ProductPromotion> Products { get; set; } = new List<ProductPromotion>();
 

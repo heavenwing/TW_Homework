@@ -30,7 +30,7 @@ namespace AdminConsole.Logic
                 {
                     var dto = CreateDto(kvp, product);
 
-                    ComputePromotion(product, dto);
+                    ComputePromotion(product, dto, result);
 
                     result.Products.Add(dto);
                 }
@@ -51,9 +51,16 @@ namespace AdminConsole.Logic
             };
         }
 
-        private void ComputePromotion(Product product, ProductDto dto)
+        private void ComputePromotion(Product product, ProductDto dto, ComputeResultDto result)
         {
-            throw new NotImplementedException();
+            if (product.Promotions.Count == 0) return;
+
+            var overridedPromotion = product.Promotions.Find(o => o.Promotion.IsOverride);
+            if (overridedPromotion != null && overridedPromotion.Promotion != null)
+            {
+                var calculator = (IPromotionCalculator)Activator.CreateInstance(Type.GetType(overridedPromotion.Promotion.CalculatorType));
+                calculator.Compute(product, dto, result);
+            }
         }
     }
 }

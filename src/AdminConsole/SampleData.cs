@@ -11,20 +11,23 @@ namespace AdminConsole
     {
         public const string PromotionId_BuyTwo = "a02cacfb-3c66-4c6c-a32c-3cfd6b4f80dd";
         public const string PromotionId_95Off = "6f6717c4-bf7c-4521-a791-ebb6992b9f63";
+        public const string PromotionCalculatorType_BuyTwo = "AdminConsole.Logic.PromotionCalculatorForBuyTwo";
+        public const string PromotionCalculatorType_95Off = "AdminConsole.Logic.PromotionCalculatorFor95Off";
+
         public static void Create(MarketDbContext db)
         {
             db.Promotions.Add(new Promotion
             {
                 Id = new Guid(PromotionId_BuyTwo),
                 Name = "买二赠一",
-                ProcessType = "TODO",
+                CalculatorType = PromotionCalculatorType_BuyTwo,
                 IsOverride = true
             });
             db.Promotions.Add(new Promotion
             {
                 Id = new Guid(PromotionId_95Off),
                 Name = "95折",
-                ProcessType = "TODO",
+                CalculatorType = PromotionCalculatorType_95Off,
                 IsOverride = false
             });
             db.SaveChanges();
