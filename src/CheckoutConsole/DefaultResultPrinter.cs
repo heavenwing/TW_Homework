@@ -38,7 +38,7 @@ namespace CheckoutConsole
             foreach (var product in result.Products.Where(
                 o => o.Promotions.Contains(PromotionConsts.PromotionId_BuyTwo)))
             {
-                writer.WriteLine($"名称：{product.Name}，数量：{product.SavingCount.ToString("n0")}{product.Unit}");
+                writer.WriteLine($"名称：{product.Name}\t数量：{product.SavingCount.ToString("n0")}{product.Unit}");
             }
         }
 
@@ -52,10 +52,10 @@ namespace CheckoutConsole
 
         private static void PrintProduct(ProductDto product, TextWriter writer)
         {
-            var txt = $"名称：{product.Name}，数量：{product.Count}{product.Unit}，单价：{product.Price.ToString("c")}(元)，小计：{product.SubTotal.ToString("c")}(元)";
+            var txt = $"名称：{product.Name}\t数量：{product.Count}{product.Unit}\t单价：{product.Price.ToString("c")}(元)\t小计：{product.SubTotal.ToString("c")}(元)";
             if (product.Promotions.Contains(PromotionConsts.PromotionId_95Off))
             {
-                txt += $"，节省{product.SavingMoney.ToString("c")}(元)";
+                txt += $"\t节省{product.SavingMoney.ToString("c")}(元)";
             }
             writer.WriteLine(txt);
         }
