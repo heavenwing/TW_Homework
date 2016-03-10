@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AdminConsole.Dtos;
+using AdminConsole;
 
 namespace CheckoutConsole
 {
@@ -15,7 +16,30 @@ namespace CheckoutConsole
             PrintHeader(writer);
             PrintDetails(result, writer);
             PrinterDivider(writer);
+            if (result.Products.Any(o => o.Promotions.Contains(PromotionConsts.PromotionId_BuyTwo)))
+            {
+                PrintBuyTwo(result, writer);
+                PrinterDivider(writer);
+            }
+            PrintTotal(result, writer);
             PrintFooter(writer);
+        }
+
+        private static void PrintTotal(ComputeResultDto result, TextWriter writer)
+        {
+            writer.WriteLine($"总计：{result.Total.ToString("c")}(元)");
+            if (!result.Saving.Equals(0m))
+                writer.WriteLine($"节省：{result.Saving.ToString("c")}(元)");
+        }
+
+        private static void PrintBuyTwo(ComputeResultDto result, TextWriter writer)
+        {
+            writer.WriteLine("买二赠一商品：");
+            foreach (var product in result.Products.Where(
+                o => o.Promotions.Contains(PromotionConsts.PromotionId_BuyTwo)))
+            {
+                writer.WriteLine($"名称：{product.Name}，数量：{product.SavingCount.ToString("n0")}{product.Unit}");
+            }
         }
 
         private static void PrintDetails(ComputeResultDto result, TextWriter writer)
@@ -28,8 +52,12 @@ namespace CheckoutConsole
 
         private static void PrintProduct(ProductDto product, TextWriter writer)
         {
-            writer.WriteLine($"名称：{product.Name}，数量：{product.Count}{product.Unit}，单价：{product.Price.ToString("c")}(元)，小计：{product.SubTotal.ToString("c")}(元)");
-            //if (product.SavingMoney)
+            var txt = $"名称：{product.Name}，数量：{product.Count}{product.Unit}，单价：{product.Price.ToString("c")}(元)，小计：{product.SubTotal.ToString("c")}(元)";
+            if (product.Promotions.Contains(PromotionConsts.PromotionId_95Off))
+            {
+                txt += $"，节省{product.SavingMoney.ToString("c")}(元)";
+            }
+            writer.WriteLine(txt);
         }
 
         private static void PrinterDivider(TextWriter writer)

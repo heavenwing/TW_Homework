@@ -13,14 +13,14 @@ namespace AdminConsole
         {
             db.Promotions.Add(new Promotion
             {
-                Id = new Guid(PromotionConsts.PromotionId_BuyTwo),
+                Id = PromotionConsts.PromotionId_BuyTwo,
                 Name = "买二赠一",
                 CalculatorType = PromotionConsts.PromotionCalculatorType_BuyTwo,
                 IsOverride = true
             });
             db.Promotions.Add(new Promotion
             {
-                Id = new Guid(PromotionConsts.PromotionId_95Off),
+                Id = PromotionConsts.PromotionId_95Off,
                 Name = "95折",
                 CalculatorType = PromotionConsts.PromotionCalculatorType_95Off,
                 IsOverride = false
@@ -39,13 +39,13 @@ namespace AdminConsole
                     {
                         Id=Guid.NewGuid(),
                         ProductId="ITEM000001",
-                        PromotionId=new Guid(PromotionConsts.PromotionId_BuyTwo)
+                        PromotionId=PromotionConsts.PromotionId_BuyTwo
                     },
                     new ProductPromotion
                     {
                         Id=Guid.NewGuid(),
                         ProductId="ITEM000001",
-                        PromotionId=new Guid(PromotionConsts.PromotionId_95Off)
+                        PromotionId=PromotionConsts.PromotionId_95Off
                     }
                 }
             });
@@ -61,7 +61,7 @@ namespace AdminConsole
                     {
                         Id=Guid.NewGuid(),
                         ProductId="ITEM000003",
-                        PromotionId=new Guid(PromotionConsts.PromotionId_95Off)
+                        PromotionId=PromotionConsts.PromotionId_95Off
                     }
                 }
             });
@@ -77,7 +77,7 @@ namespace AdminConsole
                     {
                         Id=Guid.NewGuid(),
                         ProductId="ITEM000005",
-                        PromotionId=new Guid(PromotionConsts.PromotionId_BuyTwo)
+                        PromotionId=PromotionConsts.PromotionId_BuyTwo
                     }
                 }
             });

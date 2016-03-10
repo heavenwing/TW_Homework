@@ -44,17 +44,17 @@ namespace AdminConsoleTest.Logic
                 Assert.Equal(4m, output.Products[0].SubTotal);
                 Assert.Equal(2m, output.Products[0].SavingCount);
                 Assert.Equal(1, output.Products[0].Promotions.Count);
-                Assert.Equal(new Guid(PromotionConsts.PromotionId_BuyTwo), output.Products[0].Promotions[0]);
+                Assert.Equal(PromotionConsts.PromotionId_BuyTwo, output.Products[0].Promotions[0]);
 
                 Assert.Equal(10.45m, output.Products[1].SubTotal);
                 Assert.Equal(0.55m, output.Products[1].SavingMoney);
                 Assert.Equal(1, output.Products[1].Promotions.Count);
-                Assert.Equal(new Guid(PromotionConsts.PromotionId_95Off), output.Products[1].Promotions[0]);
+                Assert.Equal(PromotionConsts.PromotionId_95Off, output.Products[1].Promotions[0]);
 
                 Assert.Equal(6m, output.Products[2].SubTotal);
                 Assert.Equal(1m, output.Products[2].SavingCount);
                 Assert.Equal(1, output.Products[2].Promotions.Count);
-                Assert.Equal(new Guid(PromotionConsts.PromotionId_BuyTwo), output.Products[2].Promotions[0]);
+                Assert.Equal(PromotionConsts.PromotionId_BuyTwo, output.Products[2].Promotions[0]);
 
                 Assert.Equal(20.45m, output.Total);
                 Assert.Equal(5.55m, output.Saving);

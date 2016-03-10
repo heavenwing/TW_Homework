@@ -90,6 +90,9 @@
             // 
             // btnCheckout
             // 
+            this.btnCheckout.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCheckout.Location = new System.Drawing.Point(3, 213);
             this.btnCheckout.Name = "btnCheckout";
             this.btnCheckout.Size = new System.Drawing.Size(75, 23);
@@ -119,8 +122,8 @@
             this.txtInput.Size = new System.Drawing.Size(366, 440);
             this.txtInput.TabIndex = 0;
             this.txtInput.Text = "[\r\n    \'ITEM000001\',\r\n    \'ITEM000001\',\r\n    \'ITEM000001\',\r\n    \'ITEM000001\',\r\n  " +
-    "  \'ITEM000001\',\r\n    \'ITEM000003-2\',\r\n    \'ITEM000005\',\r\n    \'ITEM000005\',\r\n    " +
-    "\'ITEM000005\'\r\n]";
+    "  \'ITEM000001\',\r\n    \'ITEM000001\',\r\n    \'ITEM000003-2\',\r\n    \'ITEM000005\',\r\n    " +
+    "\'ITEM000005\',\r\n    \'ITEM000005\'\r\n]";
             // 
             // MainForm
             // 

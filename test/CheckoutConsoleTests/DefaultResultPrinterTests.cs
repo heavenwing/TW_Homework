@@ -12,9 +12,9 @@ namespace CheckoutConsole.Tests
     public class DefaultResultPrinterTests
     {
         [TestMethod()]
-        public void PrintTest()
+        public void PrintWhenOnlyBuyTwo()
         {
-            Assert.Fail();
+            //var input=new 
         }
     }
 }
