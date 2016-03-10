@@ -57,12 +57,14 @@ namespace AdminConsole.Logic
             if (overridedPromotion != null && overridedPromotion.Promotion != null)
             {
                 RealPromotionCalculate(product, dto, overridedPromotion);
+                dto.Promotions.Add(overridedPromotion.PromotionId);
             }
             else
             {
                 foreach (var pro in product.Promotions)
                 {
                     RealPromotionCalculate(product, dto, pro);
+                    dto.Promotions.Add(pro.PromotionId);
                 }
             }
         }

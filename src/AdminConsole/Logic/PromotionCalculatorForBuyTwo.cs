@@ -9,7 +9,7 @@ namespace AdminConsole.Logic
         public void Compute(Product product, ProductDto dto)
         {
             dto.SavingCount = (int)(dto.Count / 3);
-            dto.SavingMoney = dto.SavingCount.Value * dto.Price;
+            dto.SavingMoney = dto.SavingCount * dto.Price;
             dto.SubTotal = dto.SubTotal - dto.SavingMoney;
         }
     }

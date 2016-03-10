@@ -9,25 +9,20 @@ namespace AdminConsole
 {
     public class SampleData
     {
-        public const string PromotionId_BuyTwo = "a02cacfb-3c66-4c6c-a32c-3cfd6b4f80dd";
-        public const string PromotionId_95Off = "6f6717c4-bf7c-4521-a791-ebb6992b9f63";
-        public const string PromotionCalculatorType_BuyTwo = "AdminConsole.Logic.PromotionCalculatorForBuyTwo";
-        public const string PromotionCalculatorType_95Off = "AdminConsole.Logic.PromotionCalculatorFor95Off";
-
         public static void Create(MarketDbContext db)
         {
             db.Promotions.Add(new Promotion
             {
-                Id = new Guid(PromotionId_BuyTwo),
+                Id = new Guid(PromotionConsts.PromotionId_BuyTwo),
                 Name = "买二赠一",
-                CalculatorType = PromotionCalculatorType_BuyTwo,
+                CalculatorType = PromotionConsts.PromotionCalculatorType_BuyTwo,
                 IsOverride = true
             });
             db.Promotions.Add(new Promotion
             {
-                Id = new Guid(PromotionId_95Off),
+                Id = new Guid(PromotionConsts.PromotionId_95Off),
                 Name = "95折",
-                CalculatorType = PromotionCalculatorType_95Off,
+                CalculatorType = PromotionConsts.PromotionCalculatorType_95Off,
                 IsOverride = false
             });
             db.SaveChanges();
@@ -44,13 +39,13 @@ namespace AdminConsole
                     {
                         Id=Guid.NewGuid(),
                         ProductId="ITEM000001",
-                        PromotionId=new Guid(PromotionId_BuyTwo)
+                        PromotionId=new Guid(PromotionConsts.PromotionId_BuyTwo)
                     },
                     new ProductPromotion
                     {
                         Id=Guid.NewGuid(),
                         ProductId="ITEM000001",
-                        PromotionId=new Guid(PromotionId_95Off)
+                        PromotionId=new Guid(PromotionConsts.PromotionId_95Off)
                     }
                 }
             });
@@ -66,7 +61,7 @@ namespace AdminConsole
                     {
                         Id=Guid.NewGuid(),
                         ProductId="ITEM000003",
-                        PromotionId=new Guid(PromotionId_95Off)
+                        PromotionId=new Guid(PromotionConsts.PromotionId_95Off)
                     }
                 }
             });
@@ -82,7 +77,7 @@ namespace AdminConsole
                     {
                         Id=Guid.NewGuid(),
                         ProductId="ITEM000005",
-                        PromotionId=new Guid(PromotionId_BuyTwo)
+                        PromotionId=new Guid(PromotionConsts.PromotionId_BuyTwo)
                     }
                 }
             });

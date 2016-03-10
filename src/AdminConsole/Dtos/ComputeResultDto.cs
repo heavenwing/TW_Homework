@@ -28,6 +28,8 @@ namespace AdminConsole.Dtos
 
         public decimal  SavingMoney { get; set; }
 
-        public decimal? SavingCount { get; set; }
+        public decimal SavingCount { get; set; }
+
+        public List<Guid> Promotions { get; set; } = new List<Guid>();
     }
 }
