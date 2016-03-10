@@ -24,18 +24,18 @@ namespace CheckoutConsole
 
         private async void btnCheckout_Click(object sender, EventArgs e)
         {
-            var output = await GetComputingResultFromServer();
+            var output = await GetResultFromServer();
 
-            var writer = new StringWriter();
             if (Printer == null)
                 Printer = new RawResultPrinter();
+            var writer = new StringWriter();
             Printer.Print(output,writer);
             txtOutput.Text = writer.ToString();
         }
 
         public IResultPrinter Printer { get; set; }
 
-        private async Task<ComputeResultDto> GetComputingResultFromServer()
+        private async Task<ComputeResultDto> GetResultFromServer()
         {
             var data = JsonConvert.DeserializeObject<string[]>(txtInput.Text);
             var api = new HttpClient();
